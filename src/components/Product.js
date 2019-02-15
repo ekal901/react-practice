@@ -9,21 +9,22 @@ export default class Product extends React.Component {
         this.state = {
             product: 'Socks',
             brand: 'Vue Mastery',
-            inStock: false,
+            inStock: true,
             image: images.green,
+            premium: false,
             selectedVariant: 0,
             details: ["80% cotton", "20% polyester", "Gender-neutral"],
             variants: [
                 {
                     variantId: 2234,
                     variantColor: "green",
-                    variantImage: "assets/vmSocks-green.jpeg",
+                    variantImage: images.green,
                     variantQuantity: 10
                 },
                 {
                     variantId: 2235,
                     variantColor: "blue",
-                    variantImage: "assets/vmSocks-blue.jpeg",
+                    variantImage: images.blue,
                     variantQuantity: 0
                 }
             ],
@@ -31,12 +32,26 @@ export default class Product extends React.Component {
         }
         this.addToCart = this.addToCart.bind(this);
         this.handleImage = this.handleImage.bind(this);
+        this.checkStock = this.checkStock.bind(this);
     }
 
-    handleImage(variantColor){
+    handleImage(variantImage, variantQuantity){
         this.setState({
-            image: images[variantColor]
+            image: variantImage,
         })
+        this.checkStock(variantQuantity);
+    }
+
+    checkStock(variantQuantity){
+        if(variantQuantity > 0){
+            this.setState({
+                inStock: true
+            })
+        } else {
+            this.setState({
+                inStock: false
+            })
+        }
     }
 
     addToCart(cart) {
@@ -56,9 +71,6 @@ export default class Product extends React.Component {
                 return (<ProductColor className="color-box" variant={variant} key={idx} id={idx} onImage={this.handleImage} />)
             })
         }
-
-
-
         return (
             <div className="product">
                 <div className="product-image">
@@ -67,6 +79,8 @@ export default class Product extends React.Component {
                 <div className="product-info">
                     <h1>{this.state.brand + ' ' + this.state.product}</h1>
                     {this.state.inStock ? (<p>In Stock</p>) : (<p>Out of Stock</p>)}
+                    <p>User is Premium: {this.state.premium ? "true" : "false"}</p>
+                    <p>Shipping: {this.state.premium ? "Free" : "$2.99"}</p>
                     <ul>
                         {detailList(this.state.details)}
                     </ul>
@@ -85,5 +99,9 @@ export default class Product extends React.Component {
         )
     }
 
+    
+}
+
+Product.propTypes = {
     
 }

@@ -4,7 +4,7 @@ import React from 'react';
 export default class ProductColor extends React.Component {
   updateProduct() {
     // this.props.onImage(this.props.id) //passing index
-    this.props.onImage(this.props.variant.variantColor)
+    this.props.onImage(this.props.variant.variantImage, this.props.variant.variantQuantity)
   }
 
   render() {
