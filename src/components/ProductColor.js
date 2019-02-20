@@ -1,24 +1,24 @@
-import React from 'react';
-
+import React from "react";
 
 export default class ProductColor extends React.Component {
   updateProduct() {
     // this.props.onImage(this.props.id) //passing index
-    this.props.onImage(this.props.variant.variantImage, this.props.variant.variantQuantity)
+    // this.props.onImage(this.props.id);
+    this.props.onProduct(this.props.id);
   }
 
   render() {
     const style = {
-      backgroundColor: this.props.variant.variantColor,
+      backgroundColor: this.props.variant.variantColor
     };
     return (
-      <div>
-          <ul>
-              <p className="color-box" style={style}
-              onMouseOver={() => { this.updateProduct()} }> 
-              </p>
-          </ul>
-      </div>
+      <p
+        className="color-box"
+        style={style}
+        onMouseOver={() => {
+          this.updateProduct();
+        }}
+      />
     );
   }
 }
