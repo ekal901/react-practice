@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewError from "./ReviewError";
 
 export default class ProductReview extends React.Component {
   constructor(props) {
@@ -56,32 +57,47 @@ export default class ProductReview extends React.Component {
     } else {
       this.setState({
         errors: []
+      }, () => { //initialize errors
+        if (this.state.name === "") {
+          this.setState({
+            errors: this.state.errors.concat("Name Required")
+          });
+        }
+        if (this.state.review === "") {
+          this.setState({
+            errors: this.state.errors.concat("Review required")
+          });
+        }
+        if (this.state.rating === "") {
+          this.setState({
+            errors: this.state.errors.concat("Rating required")
+          });
+        }
       });
-      if (this.state.name === "") {
-        this.setState({
-          errors: this.state.errors.concat("Name Required")
-        });
-      }
-      if (this.state.review === "") {
-        this.setState({
-          errors: this.state.errors.concat("Review required")
-        });
-      }
-      if (this.state.rating === "") {
-        this.setState({
-          errors: this.state.errors.concat("Rating required")
-        });
-      }
     }
   };
 
   render() {
+    const errorsList = (errors) => {
+      console.log(errors);
+      return errors.map((error, idx) => {
+        console.log(error);
+        return (
+          <li><ReviewError value={error}></ReviewError></li>
+        );
+      })
+    }
+
     return (
       <form className="review-form" onSubmit={this.onSubmit}>
-        <div>
-          <b>Please correct the following erros(s):</b>
-          <ul>{/* <li>{error}</li> */}</ul>
-        </div>
+        {
+          this.state.errors.length === 0
+            ? ""
+            : (<div>
+              <b>Please correct the following erros(s):</b>
+              <ul>{errorsList(this.state.errors)}</ul>
+            </div>)
+        }
         <p>
           <label htmlFor="name">Name:</label>
           <input

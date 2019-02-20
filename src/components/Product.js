@@ -38,7 +38,6 @@ export default class Product extends React.Component {
     this.setState({
       image: this.state.variants[index].variantImage
     });
-    this.checkStock(this.state.variants[index].variantQuantity);
   };
 
   checkStock = variantQuantity => {
@@ -56,11 +55,9 @@ export default class Product extends React.Component {
 
   handleProduct = index => {
     this.setState(
-      {
-        selectedVariant: index
-      }, //run function after setState
-      () => {
+      { selectedVariant: index }, () => {//run function after setState
         this.handleImage(this.state.selectedVariant);
+        this.checkStock(this.state.variants[index].variantQuantity);
       }
     );
   };
@@ -112,7 +109,7 @@ export default class Product extends React.Component {
     return (
       <div className="product">
         <div className="product-image">
-          <img src={this.state.image} alt="vmSocks-green" />
+          <img src={this.state.image} alt={this.state.image} />
         </div>
         <div className="product-info">
           <h1>{this.state.brand + " " + this.state.product}</h1>
@@ -124,17 +121,11 @@ export default class Product extends React.Component {
           <button
             onClick={() => this.addToCart()}
             disabled={!this.state.inStock}
-            className={this.state.inStock ? "" : "disabledButton"}
-          >
-            Add to Cart
+            className={this.state.inStock ? "" : "disabledButton"}>Add to Cart
           </button>
           <div>
             <h2>Reviews</h2>
-            {this.state.reviews.length === 0 ? (
-              <p>There are no reviews yet.</p>
-            ) : (
-              <ul>{reviewList(this.state.reviews)}</ul>
-            )}
+            {this.state.reviews.length === 0 ? (<p>There are no reviews yet.</p>) : (<ul>{reviewList(this.state.reviews)}</ul>)}
           </div>
           <ReviewForm showReview={this.showReview} />
         </div>
