@@ -64,14 +64,18 @@ export default class ProductReview extends React.Component {
           });
         }
         if (this.state.review === "") {
-          this.setState({
-            errors: this.state.errors.concat("Review required")
-          });
+          this.setState(
+            (prevState) => ({
+              errors: prevState.errors.concat("Review Required")
+            })
+          )
         }
         if (this.state.rating === "") {
-          this.setState({
-            errors: this.state.errors.concat("Rating required")
-          });
+          this.setState(
+            (prevState) => ({
+              errors: prevState.errors.concat("Rating Required")
+            })
+          )
         }
       });
     }
@@ -79,9 +83,7 @@ export default class ProductReview extends React.Component {
 
   render() {
     const errorsList = (errors) => {
-      console.log(errors);
       return errors.map((error, idx) => {
-        console.log(error);
         return (
           <li><ReviewError value={error}></ReviewError></li>
         );
