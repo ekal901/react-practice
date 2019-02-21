@@ -5,7 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: []
+      cart: [],
+      premium: true
     };
   }
 
@@ -20,7 +21,7 @@ class App extends Component {
         <div className="cart">
           <p>Cart({this.state.cart.length})</p>
         </div>
-        <Product onCart={this.addToCart} />
+        <Product onCart={this.addToCart} premium={this.state.premium} />
       </div>
     );
   }

@@ -13,7 +13,7 @@ export default class Product extends React.Component {
       brand: "React Mastery",
       inStock: true,
       image: images.green,
-      premium: true,
+      premium: props.premium,
       selectedVariant: 0,
       details: ["80% cotton", "20% polyester", "Gender-neutral"],
       variants: [
@@ -123,12 +123,12 @@ export default class Product extends React.Component {
             disabled={!this.state.inStock}
             className={this.state.inStock ? "" : "disabledButton"}>Add to Cart
           </button>
-          <div>
-            <h2>Reviews</h2>
-            {this.state.reviews.length === 0 ? (<p>There are no reviews yet.</p>) : (<ul>{reviewList(this.state.reviews)}</ul>)}
-          </div>
-          <ReviewForm showReview={this.showReview} />
         </div>
+        <div>
+          <h2>Reviews</h2>
+          {this.state.reviews.length === 0 ? (<p>There are no reviews yet.</p>) : (<ul>{reviewList(this.state.reviews)}</ul>)}
+        </div>
+        <ReviewForm showReview={this.showReview} />
       </div>
     );
   }
