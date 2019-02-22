@@ -12,7 +12,7 @@ export default class ProductColor extends React.Component {
       backgroundColor: this.props.variant.variantColor
     };
     return (
-      <p
+      <div
         className="color-box"
         style={style}
         onMouseOver={() => {

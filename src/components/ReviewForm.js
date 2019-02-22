@@ -120,7 +120,7 @@ export default class ProductReview extends React.Component {
           />
         </p>
         <p>
-          <label htmlFor="rating">Rating:</label>
+          <label htmlFor="rating">Rating: </label>
           <select
             id="rating"
             name="rating"

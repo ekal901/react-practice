@@ -81,15 +81,13 @@ export default class Product extends React.Component {
     const variantComponent = variants => {
       return variants.map((variant, idx) => {
         return (
-          <ul>
-            <ProductColor
-              className="color-box"
-              variant={variant}
-              key={idx}
-              id={idx}
-              onProduct={this.handleProduct}
-            />
-          </ul>
+          <ProductColor
+            className="color-box"
+            variant={variant}
+            key={idx}
+            id={idx}
+            onProduct={this.handleProduct}
+          />
         );
       });
     };
@@ -117,7 +115,7 @@ export default class Product extends React.Component {
           <p>User is Premium: {this.state.premium ? "true" : "false"}</p>
           <p>Shipping: {this.state.premium ? "Free" : "$2.99"}</p>
           <ul>{detailList(this.state.details)}</ul>
-          <ul>{variantComponent(this.state.variants)}</ul>
+          {variantComponent(this.state.variants)}
           <button
             onClick={() => this.addToCart()}
             disabled={!this.state.inStock}
